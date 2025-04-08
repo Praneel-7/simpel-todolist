@@ -1,213 +1,176 @@
-/* Reset and Base */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+body {
+  margin: 0;
+  font-family: 'Bree Serif', serif;
+  background-color: #121212;
+  color: #eee;
+  transition: background 0.3s, color 0.3s;
+}
+
+.todo-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #1e1e1e;
+  border-radius: 20px;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+}
+
+h1, h2, h3 {
+  text-align: center;
+}
+
+.todo-input {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 2rem;
+}
+
+.todo-input input,
+.todo-input textarea,
+.todo-input select {
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 12px;
+  border: 1px solid #555;
+  background-color: #1e1e1e;
+  color: #eee;
+}
+
+.todo-input button {
+  padding: 12px;
+  background: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+.todo-input button:hover {
+  background: #45a049;
+  box-shadow: 0 0 10px #4caf50;
+}
+
+.sections {
+  display: grid;
+  gap: 20px;
+}
+
+.section {
+  background: #263238;
+  padding: 15px;
+  border-radius: 15px;
+  animation: fadeIn 0.6s ease-in;
+}
+
+.task-list li {
+  padding: 10px;
+  background: #37474f;
+  margin: 5px 0;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  animation: slideIn 0.3s ease;
+}
+
+.task-note {
+  font-size: 14px;
+  color: #ccc;
+  margin-left: 10px;
+  font-style: italic;
+}
+
+.monthly-tracker {
+  background: #263238;
+  padding: 20px;
+  border-radius: 15px;
+  margin-top: 30px;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  margin: 15px 0;
+}
+
+.calendar-day {
+  background-color: #37474f;
+  padding: 10px;
+  text-align: center;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+  color: #fff;
+}
+
+.calendar-day.marked {
+  background-color: #00bcd4;
+  color: #fff;
+}
+
+.progress-bar-wrapper {
+  background: #555;
+  height: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  background: #00bcd4;
+  height: 100%;
+  width: 0%;
+  transition: width 0.3s ease-in-out;
+}
+
+#progressPercent {
+  text-align: center;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideIn {
+  from { transform: translateX(-10px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
   }
-  
-  body, html {
-    height: 100%;
-    width: 100%;
-    font-family: 'Bree Serif', serif;
-    transition: background 0.3s, color 0.3s;
+  100% {
+    transform: scale(1);
+    opacity: 1;
   }
-  
-  body.light {
-    background: linear-gradient(to right, #6a11cb, #2575fc);
-    color: #222;
+}
+
+.task-added {
+  animation: popIn 0.3s ease-out;
+}
+
+/* Mobile responsive */
+@media (max-width: 600px) {
+  .calendar-grid {
+    grid-template-columns: repeat(5, 1fr);
   }
-  
-  body.dark {
-    background: #121212;
-    color: #eee;
-  }
-  
-  .main {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-  }
-  
-  /* Container */
+
   .todo-container {
-    background: rgba(255, 255, 255, 0.95);
-    color: #222;
-    padding: 40px;
-    border-radius: 20px;
-    width: 90%;
-    max-width: 700px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-    transition: all 0.4s ease;
-    animation: fadeIn 0.7s ease-in;
+    margin: 1rem;
+    padding: 1rem;
   }
-  
-  body.dark .todo-container {
-    background: rgba(30, 30, 30, 0.95);
-    color: #eee;
+
+  h1, h2, h3 {
+    font-size: 20px;
   }
-  
-  /* Animations */
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  
-  /* Dark mode toggle */
-  .mode-toggle {
-    text-align: right;
-    margin-bottom: 10px;
-    font-size: 0.9rem;
-  }
-  
-  /* Title */
-  h1 {
-    text-align: center;
-    margin-bottom: 25px;
-    font-size: 2rem;
-  }
-  
-  /* Input Group */
-  .input-group {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr auto;
-    gap: 10px;
-    margin-bottom: 20px;
-  }
-  
-  .input-group input,
-  .input-group select {
-    padding: 10px;
-    border-radius: 10px;
-    border: 1px solid #ccc;
-    font-size: 1rem;
-  }
-  
-  .input-group button {
-    background-color: #2575fc;
-    color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 10px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-  
-  .input-group button:hover {
-    background-color: #1b5edc;
-  }
-  
-  /* Summary */
-  #taskSummary {
-    text-align: center;
-    margin-bottom: 15px;
-    font-weight: bold;
-  }
-  
-  /* Task List */
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  li {
-    background-color: #f7f9fc;
-    margin-bottom: 10px;
-    border-radius: 12px;
-    padding: 15px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    transition: transform 0.3s ease, background 0.3s;
-    animation: fadeIn 0.4s ease;
-  }
-  
-  li:hover {
-    transform: scale(1.02);
-  }
-  
-  body.dark li {
-    background-color: #1e1e1e;
-  }
-  
-  /* Task Content */
-  .task-main {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-weight: 500;
-  }
-  
-  .task-details {
-    font-size: 0.85rem;
-    margin-top: 5px;
-    color: #555;
-  }
-  
-  .task-note {
-    font-size: 0.85rem;
-    color: #555;
-    margin-top: 5px;
-    font-style: italic;
-  }
-  
-  .completed .task-main {
-    text-decoration: line-through;
-    color: #aaa;
-  }
-  
-  /* Priority Colors */
-  .priority-High {
-    color: #ff4e4e;
-  }
-  .priority-Medium {
-    color: #ffa500;
-  }
-  .priority-Low {
-    color: #2ecc71;
-  }
-  
-  /* Delete Button */
-  .task-main button {
-    background: transparent;
-    border: none;
-    font-size: 1.2rem;
-    color: #888;
-    cursor: pointer;
-    transition: color 0.3s;
-  }
-  
-  .task-main button:hover {
-    color: #e74c3c;
-  }
-  
-  /* Motivational Quote */
-  .quote-box {
-    background: #ffeaa7;
-    padding: 10px 15px;
-    border-radius: 10px;
-    font-size: 1rem;
-    text-align: center;
-    margin-bottom: 15px;
-    font-style: italic;
-    animation: fadeIn 1s ease-in-out;
-  }
-  
-  body.dark .quote-box {
-    background: #2d3436;
-    color: #f5f5f5;
-  }
-  
-  /* Daily Section */
-  .daily-section {
-    margin: 15px 0 20px;
-    background-color: #f1f2f6;
-    padding: 15px;
-    border-radius: 15px;
-    font-size: 0.95rem;
-    animation: fadeIn 1s ease-in-out;
-  }
-  
-  .daily-section h3 {
-    margin-bottom: 8px;
-  }
-  
+}

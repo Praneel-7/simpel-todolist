@@ -2,59 +2,49 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>To-Do List</title>
-
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Praneel's To-Do List</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="stylee.css" />
 </head>
-<body>
-  <div class="main">
-    <div class="todo-container">
+<body class="dark">
+  <div class="todo-container">
+    <h1>📝 Praneel's To-Do List</h1>
+    <h3 id="quote">Loading motivational quote...</h3>
 
-      <div class="mode-toggle">
-        <label>
-          <input type="checkbox" id="darkToggle" onchange="toggleDarkMode()" />
-          🌙 Dark Mode
-        </label>
+    <div class="todo-input">
+      <input type="text" id="taskInput" placeholder="Add a new task..." />
+      <textarea id="taskNote" placeholder="Add a note (optional)"></textarea>
+      <select id="taskCategory">
+        <option value="studiesList">📚 Studies</option>
+        <option value="projectsList">💼 Projects</option>
+        <option value="fitnessList">🏀 Fitness</option>
+      </select>
+      <button onclick="addTask()">Add Task 📝</button>
+    </div>
+
+    <div class="sections">
+      <div class="section">
+        <h2>📚 Studies</h2>
+        <ul id="studiesList" class="task-list"></ul>
       </div>
-
-      <!-- Motivational Quote -->
-      <div class="quote-box" id="quoteBox">💬 You’ve got this!</div>
-
-      <h1>📝 My To-Do List</h1>
-
-      <!-- Daily Tasks Section -->
-      <div class="daily-section">
-        <h3>🔁 Daily Reminders</h3>
-        <ul>
-          <li>💧 SQL WORK!!</li>
-          <li>🧘 BE PRODUCTIVE JOG,RUN</li>
-          <li>📖 FIND YOUR MANTRA,MUSIC</li>
-          <li>🧠 REFLECT </li>
-        </ul>
+      <div class="section">
+        <h2>💼 Projects</h2>
+        <ul id="projectsList" class="task-list"></ul>
       </div>
-
-      <!-- Input Area -->
-      <div class="input-group">
-        <input type="text" id="taskTitle" placeholder="Task title..." />
-        <input type="text" id="taskNote" placeholder="Add a note..." />
-        <input type="date" id="dueDate" />
-        <select id="priority">
-          <option value="Low">Low</option>
-          <option value="Medium" selected>Medium</option>
-          <option value="High">High</option>
-        </select>
-        <button onclick="addTask()">Add</button>
+      <div class="section">
+        <h2>🏀 Fitness</h2>
+        <ul id="fitnessList" class="task-list"></ul>
       </div>
+    </div>
 
-      <!-- Summary -->
-      <p id="taskSummary">📋 Total Tasks: 0 | ✅ Completed: 0</p>
-
-      <!-- Task List -->
-      <ul id="taskList"></ul>
-
+    <div class="monthly-tracker">
+      <h2>📆 Monthly Progress Tracker</h2>
+      <div class="calendar-grid" id="calendarGrid"></div>
+      <div class="progress-bar-wrapper">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+      <div id="progressPercent">0% Complete</div>
     </div>
   </div>
 
